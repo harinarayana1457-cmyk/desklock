@@ -4,7 +4,7 @@ DeskLock is a Chrome Extension paired with a lightweight Windows Native Messagin
 
 ---
 
-## Features
+## 🌟 Features
 - **Instant Locking**: Lock your workstation using the central dashboard button or globally registered keyboard shortcuts.
 - **Global Key Bindings**: Includes three pre-configured shortcut listeners:
   - `Ctrl + Shift + L`
@@ -15,13 +15,13 @@ DeskLock is a Chrome Extension paired with a lightweight Windows Native Messagin
 
 ---
 
-## Prerequisites
+## ⚙️ Prerequisites
 - **Operating System**: Windows
 - **Python**: Python 3.x installed and added to your system `PATH` (needed to run the background lock client).
 
 ---
 
-## Installation & Setup
+## 🚀 Installation & Setup
 
 ### Step 1: Load the Chrome Extension
 1. Open Google Chrome and go to the Extensions page: `chrome://extensions/`.
@@ -45,7 +45,7 @@ DeskLock is a Chrome Extension paired with a lightweight Windows Native Messagin
 
 ---
 
-## How to Set Up a Custom Shortcut
+## ⌨️ How to Set Up a Custom Shortcut
 
 Chrome extensions require you to explicitly give shortcuts **Global** permission so they can trigger even when Chrome is minimized or you are playing a game/working in another app.
 
@@ -69,7 +69,7 @@ Chrome extensions require you to explicitly give shortcuts **Global** permission
 
 ---
 
-## Using the Sleep Timer
+## ⏱️ Using the Sleep Timer
 1. Open the DeskLock popup dashboard.
 2. Scroll to the **Sleep Timer** card.
 3. Select your desired delay (e.g., 30 Seconds, 1 Minute, 5 Minutes).
@@ -78,7 +78,7 @@ Chrome extensions require you to explicitly give shortcuts **Global** permission
 
 ---
 
-## Uninstallation
+## 🗑️ Uninstallation
 If you wish to remove the registry edits and clean up local configurations:
 1. Double-click the **`uninstall.bat`** file in the project folder.
 2. Remove the extension from `chrome://extensions/`.
