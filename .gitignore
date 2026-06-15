@@ -1,0 +1,11 @@
+# Local native messaging configuration (contains user-specific extension ID and paths)
+com.desklock.host.json
+
+# Local debug logs
+host_debug.log
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

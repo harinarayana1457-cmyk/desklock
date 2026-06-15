@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeskLock Dashboard</title>
+  <!-- Google Fonts: Outfit (headings) and Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-container">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        <span class="logo-text">DESK<span class="logo-highlight">LOCK</span></span>
+      </div>
+      <div class="status-badge" id="host-status">
+        <span class="status-dot"></span>
+        <span class="status-label">Checking...</span>
+      </div>
+    </header>
+
+    <!-- Main Content Tabs -->
+    <main class="app-main">
+      <!-- Tab Buttons -->
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="tab-btn" data-tab="setup">Host Setup</button>
+      </div>
+
+      <!-- Dashboard Tab -->
+      <section class="tab-content active" id="tab-dashboard">
+        <!-- Central Interactive Lock Button -->
+        <div class="lock-button-wrapper">
+          <button class="lock-button" id="btn-lock-test" title="Click to test lock PC">
+            <div class="lock-pulse"></div>
+            <div class="lock-btn-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+          </button>
+          <span class="lock-hint">Tap to Lock PC</span>
+        </div>
+
+        <!-- Settings Card -->
+        <div class="settings-card">
+          <h3 class="card-title">Trigger Action</h3>
+          
+          <div class="control-group">
+            <label for="select-trigger">Action Trigger</label>
+            <div class="select-wrapper">
+              <select id="select-trigger">
+                <option value="ctrl-shift-1">Shortcut (Ctrl+Shift+L)</option>
+                <option value="ctrl-space-1">Shortcut (Ctrl+Space)</option>
+                <option value="custom-1">Custom Shortcut</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="control-group" id="speed-control-group">
+            <div class="label-row">
+              <label for="range-threshold">Click Speed Window</label>
+              <span class="value-display" id="threshold-val">1.5s</span>
+            </div>
+            <input type="range" id="range-threshold" min="500" max="3000" step="100" value="1500">
+            <span class="range-subtext">Time window allowed to click buttons consecutively.</span>
+          </div>
+        </div>
+
+        <!-- Sleep Timer Card -->
+        <div class="settings-card timer-card">
+          <h3 class="card-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; color: var(--accent-cyan);">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            Sleep Timer
+          </h3>
+          <div class="timer-controls">
+            <div class="select-wrapper" id="timer-select-wrapper" style="margin-bottom: 10px;">
+              <select id="select-timer">
+                <option value="0">Off (Instant Lock)</option>
+                <option value="10">10 Seconds</option>
+                <option value="30">30 Seconds</option>
+                <option value="60">1 Minute</option>
+                <option value="180">3 Minutes</option>
+                <option value="300">5 Minutes</option>
+                <option value="600">10 Minutes</option>
+              </select>
+            </div>
+            <button class="lock-button-small" id="btn-start-timer" style="display: none;">Start Countdown</button>
+            <div class="countdown-display" id="countdown-area" style="display: none;">
+              <span class="countdown-time" id="countdown-time">00:00</span>
+              <button class="btn-cancel-timer" id="btn-cancel-timer">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-row">
+          <div class="stat-item">
+            <span class="stat-value" id="stat-count">0</span>
+            <span class="stat-label">Total Locks</span>
+          </div>
+          <button class="btn-text" id="btn-reset-stats">Reset Stats</button>
+        </div>
+      </section>
+
+      <!-- Setup Guide Tab -->
+      <section class="tab-content" id="tab-setup">
+        <div class="instructions-card">
+          <h3 class="card-title">Setup Windows Native Host</h3>
+          <p class="instructions-intro">Chrome Extensions cannot directly lock Windows. You need to register a lightweight Python locker host using the PowerShell installer.</p>
+          
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-num">1</div>
+              <div class="step-detail">
+                <strong>Copy Extension ID</strong>
+                <p class="step-text">You will need to paste this ID during installation:</p>
+                <div class="copy-box">
+                  <span id="extension-id-val">Retrieving...</span>
+                  <button class="btn-icon" id="btn-copy-id" title="Copy Extension ID">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-num">2</div>
+              <div class="step-detail">
+                <strong>Run the Setup Script</strong>
+                <p class="step-text">Open PowerShell, navigate to the folder, and run:</p>
+                <code>.\install.ps1</code>
+                <p class="step-text">Paste the Extension ID above when prompted.</p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-num">3</div>
+              <div class="step-detail">
+                <strong>Reload Extension</strong>
+                <p class="step-text">Once complete, close the extension and reopen it. The top status should show connected in green!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

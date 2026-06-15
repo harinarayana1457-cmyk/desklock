@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "DeskLock",
+  "version": "1.0",
+  "description": "Lock your Windows PC using headphone clicks, media keys, or custom shortcuts.",
+  "permissions": [
+    "nativeMessaging",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/lock16.png",
+      "48": "icons/lock48.png",
+      "128": "icons/lock128.png"
+    }
+  },
+  "commands": {
+    "lock-trigger-keyboard-ctrl-shift": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
+      },
+      "description": "Lock PC Shortcut (Ctrl+Shift+L)",
+      "global": true
+    },
+    "lock-trigger-keyboard-ctrl-space": {
+      "suggested_key": {
+        "default": "Ctrl+Space"
+      },
+      "description": "Lock PC Shortcut (Ctrl+Space)",
+      "global": true
+    },
+    "lock-trigger-keyboard-custom": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9"
+      },
+      "description": "Lock PC Shortcut (Custom)",
+      "global": true
+    }
+  }
+}
